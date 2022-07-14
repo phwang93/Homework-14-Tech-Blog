@@ -1,22 +1,27 @@
-module.exports = {
-  format_date: (date) => {
-    // Format date as MM/DD/YYYY
-    return date.toLocaleDateString();
-  },
-  format_amount: (amount) => {
-    // format large numbers with commas
-    return parseInt(amount).toLocaleString();
-  },
-  get_emoji: () => {
-    const randomNum = Math.random();
+const _ = require('lodash');
 
-    // Return a random emoji
-    if (randomNum > 0.7) {
-      return `<span for="img" aria-label="lightbulb">💡</span>`;
-    } else if (randomNum > 0.4) {
-      return `<span for="img" aria-label="laptop">💻</span>`;
-    } else {
-      return `<span for="img" aria-label="gear">⚙️</span>`;
+// Test helper as placeholder
+module.exports = {
+    // Format date as MM/DD/YYYY
+    format_date: (date) => {
+    return date.toLocaleDateString();
+    },
+    // Format plural for word
+    format_plural: (word, amount) => {
+        if (amount !== 1) {
+          return `${word}s`;
+        }
+    
+        return word;
+    },
+    // Removes Diacritical marks from names
+    format_deburr: word => {
+        return _.deburr(word)
+    },
+    // Run API through to test if it is empty (finish function)
+    format_isEmpty: (obj) => {
+        if (_.isEmpty(obj)) {
+            return err
+        }
     }
-  },
-};
+  }
