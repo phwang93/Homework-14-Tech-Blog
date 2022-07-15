@@ -41,7 +41,7 @@ router.get('/', withAuth, (req, res) => {
       });
   });
 
-  router.get('/edit/:id', withAuth, (req, res) => {
+  router.get('/editPost/:id', withAuth, (req, res) => {
     Post.findOne({
       where: {
         id: req.params.id
@@ -87,7 +87,7 @@ router.get('/', withAuth, (req, res) => {
       });
 });
 
-router.get('/create/', withAuth, (req, res) => {
+router.get('/createPost/', withAuth, (req, res) => {
     Post.findAll({
       where: {
         // use the ID from the session

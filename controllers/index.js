@@ -5,10 +5,9 @@ const apiRoutes = require('./api');
 const homeRoutes = require('./homeRoutes');
 const dashboardRoutes = require('./dashboardRoutes');
 
-const handleBars = [homeRoutes, dashboardRoutes];
-
-router.use('/', handleBars);
 router.use('/api', apiRoutes);
+router.use('/', homeRoutes);
+router.use('/dashboard', dashboardRoutes);
 
 router.use((req, res) => {
   res.send("<h1>The webpage cannot be found!</h1>")
