@@ -3,7 +3,8 @@ const sequelize = require('../config/connection');
 const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
 
-router.get('/', withAuth, (req, res) => {
+router.get('/dash', withAuth, (req, res) => {
+  console.log("DASH ROUTE HIT!")
     Post.findAll({
       where: {
         // use the ID from the session
@@ -34,6 +35,7 @@ router.get('/', withAuth, (req, res) => {
         // serialize data before passing to template
         const posts = dbPostData.map(post => post.get({ plain: true }));
         res.render('dash', { posts, loggedIn: true });
+        console.log(posts);
       })
       .catch(err => {
         console.log(err);
@@ -41,7 +43,7 @@ router.get('/', withAuth, (req, res) => {
       });
   });
 
-  router.get('/edit/:id', withAuth, (req, res) => {
+  router.get('/dash/edit/:id', withAuth, (req, res) => {
     Post.findOne({
       where: {
         id: req.params.id
@@ -82,12 +84,12 @@ router.get('/', withAuth, (req, res) => {
             });
       })
       .catch(err => {
-        console.log("this is not working", err);
+        console.log(err);
         res.status(500).json(err);
       });
 });
 
-router.get('/create', withAuth, (req, res) => {
+router.get('/dash/create/', withAuth, (req, res) => {
     Post.findAll({
       where: {
         // use the ID from the session
