@@ -41,7 +41,7 @@ router.get('/', withAuth, (req, res) => {
       });
   });
 
-  router.get('/editPost/:id', withAuth, (req, res) => {
+  router.get('/edit/:id', withAuth, (req, res) => {
     Post.findOne({
       where: {
         id: req.params.id
@@ -76,18 +76,18 @@ router.get('/', withAuth, (req, res) => {
         // serialize the data
         const post = dbPostData.get({ plain: true });
 
-        res.render('edit-post', {
+        res.render('editPost', {
             post,
             loggedIn: true
             });
       })
       .catch(err => {
-        console.log(err);
+        console.log("this is not working", err);
         res.status(500).json(err);
       });
 });
 
-router.get('/createPost/', withAuth, (req, res) => {
+router.get('/create', withAuth, (req, res) => {
     Post.findAll({
       where: {
         // use the ID from the session
@@ -117,7 +117,7 @@ router.get('/createPost/', withAuth, (req, res) => {
       .then(dbPostData => {
         // serialize data before passing to template
         const posts = dbPostData.map(post => post.get({ plain: true }));
-        res.render('create-post', { posts, loggedIn: true });
+        res.render('createPost', { posts, loggedIn: true });
       })
       .catch(err => {
         console.log(err);
